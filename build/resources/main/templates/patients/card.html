@@ -12,7 +12,7 @@
   <div class="nav-links">
     <a th:href="@{/patients}" class="nav-link active">Пацієнти</a>
     <a th:href="@{/appointments}" class="nav-link">Розклад</a>
-    <a th:href="@{/notifications}" class="nav-link">🔔</a>
+    <a th:href="@{/notifications}" class="nav-link">🔔 Сповіщення</a>
   </div>
   <div class="nav-user">
     <form th:action="@{/logout}" method="post" style="display:inline">
@@ -45,6 +45,8 @@
         <dt>Статус</dt>    <dd th:text="${patient.status ?: '—'}">—</dd>
         <dt>Дата звернення</dt>
         <dd th:text="${patient.dateOfArrival != null ? #temporals.format(patient.dateOfArrival,'dd.MM.yyyy') : '—'}">—</dd>
+        <dt>Номер телефону</dt> <dd th:text="${patient.phoneNumber ?: '—'}">—</dd>
+        <dt>Дата народження</dt> <dd th:text="${patient.birthday != null ? #temporals.format(patient.birthday,'dd.MM.yyyy') : '—'}">—</dd>
       </dl>
     </div>
 

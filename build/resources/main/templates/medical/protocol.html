@@ -11,7 +11,7 @@
   <div class="nav-links">
     <a th:href="@{/patients}" class="nav-link">Пацієнти</a>
     <a th:href="@{/appointments}" class="nav-link">Розклад</a>
-    <a th:href="@{/notifications}" class="nav-link">🔔</a>
+    <a th:href="@{/notifications}" class="nav-link">🔔 Сповіщення</a>
   </div>
   <div class="nav-user">
     <form th:action="@{/logout}" method="post" style="display:inline">
@@ -183,6 +183,63 @@
         <button type="submit" class="btn btn-primary">Додати призначення</button>
       </form>
     </div>
+
+    <div class="card mt-3">
+      <h3 class="card-title">📎 Документи та зображення</h3>
+
+      <div th:if="${not #lists.isEmpty(documents)}" style="padding: 0 20px">
+        <div th:each="doc : ${documents}" class="document-item">
+
+          <div th:if="${doc.image}" class="doc-preview">
+            <a th:href="@{/medical/protocol/{pid}/documents/{did}(pid=${protocol.id},did=${doc.id})}"
+               target="_blank">
+              <img th:src="@{/medical/protocol/{pid}/documents/{did}(pid=${protocol.id},did=${doc.id})}"
+                   th:alt="${doc.originalName}"
+                   class="doc-thumbnail"/>
+            </a>
+          </div>
+
+          <div th:unless="${doc.image}" class="doc-icon">
+            <a th:href="@{/medical/protocol/{pid}/documents/{did}(pid=${protocol.id},did=${doc.id})}"
+               target="_blank" class="doc-link">
+              📄 <span th:text="${doc.originalName}">файл</span>
+            </a>
+          </div>
+
+          <div class="doc-info">
+            <span class="doc-name" th:text="${doc.originalName}">ім'я файлу</span>
+            <span class="doc-meta text-muted"
+                  th:text="${#temporals.format(doc.uploadedAt,'dd.MM.yyyy HH:mm')}">
+        </span>
+          </div>
+
+          <form th:action="@{/medical/protocol/{pid}/documents/{did}/delete(pid=${protocol.id},did=${doc.id})}"
+                method="post" style="display:inline">
+            <button type="submit" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Видалити файл?')">🗑</button>
+          </form>
+        </div>
+      </div>
+
+      <p th:if="${#lists.isEmpty(documents)}" class="text-muted p-3">
+        Документів ще немає.
+      </p>
+
+      <div style="padding: 16px 20px; border-top: 1px solid var(--border)">
+        <strong style="font-size:13px">+ Завантажити файл</strong>
+        <form th:action="@{/medical/protocol/{id}/documents(id=${protocol.id})}"
+              method="post" enctype="multipart/form-data"
+              style="display:flex; gap:10px; align-items:flex-end; margin-top:10px">
+          <div class="form-group" style="flex:1">
+            <label>Файл (зображення або PDF)</label>
+            <input type="file" name="file" accept="image/*,application/pdf" required/>
+          </div>
+          <button type="submit" class="btn btn-primary">📎 Завантажити</button>
+        </form>
+        <small class="text-muted">Дозволені формати: JPG, PNG, GIF, PDF</small>
+      </div>
+    </div>
+
   </div>
 
 </div>
