@@ -44,6 +44,12 @@ public class Patient {
     @Column(name = "date_of_arrival", nullable = false)
     private LocalDate dateOfArrival;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
     public String getFullName() {
         return this.firstName + " " + this.lastName;
     }

@@ -50,7 +50,12 @@ body {
   margin-right: 32px;
   white-space: nowrap;
 }
-.nav-links { display: flex; gap: 4px; flex: 1; }
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  align-items: center; /* Вирівнюємо всі дочірні елементи по центру */
+}
 .nav-link {
   color: rgba(255,255,255,0.85);
   text-decoration: none;
@@ -62,6 +67,11 @@ body {
 .nav-link:hover, .nav-link.active {
   background: rgba(255,255,255,0.2);
   color: var(--white);
+}
+.nav-link--notification {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .nav-user {
   display: flex;
@@ -336,5 +346,40 @@ body {
 
 /* ====== UTILS ====== */
 .text-muted { color: var(--text-muted); }
+.hidden { display: none !important; }
 a { color: var(--primary); }
 a:hover { text-decoration: underline; }
+
+/* ====== DOCUMENTS ====== */
+.document-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.document-item:last-child { border-bottom: none; }
+
+.doc-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.doc-thumbnail:hover { transform: scale(1.05); }
+
+.doc-icon { font-size: 32px; width: 80px; text-align: center; }
+
+.doc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+.doc-name { font-size: 13px; font-weight: 500; }
+.doc-meta { font-size: 11px; }
+.doc-link { font-size: 13px; color: var(--primary); text-decoration: none; }
+.doc-link:hover { text-decoration: underline; }

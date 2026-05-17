@@ -11,7 +11,7 @@
   <div class="nav-links">
     <a th:href="@{/patients}" class="nav-link active">Пацієнти</a>
     <a th:href="@{/appointments}" class="nav-link">Розклад</a>
-    <a th:href="@{/notifications}" class="nav-link">🔔</a>
+    <a th:href="@{/notifications}" class="nav-link">🔔 Сповіщення</a>
   </div>
   <div class="nav-user">
     <form th:action="@{/logout}" method="post" style="display:inline">
@@ -87,6 +87,18 @@
         <label>Дата звернення</label>
         <input type="date" name="dateOfArrival"
                th:value="${patient.dateOfArrival}"/>
+      </div>
+
+      <div class="form-group">
+        <label>Номер телефону</label>
+        <input type="text" name="phoneNumber"
+               th:value="${patient.phoneNumber}"/>
+      </div>
+
+      <div class="form-group">
+        <label>Дата народження</label>
+        <input type="date" name="birthday"
+               th:value="${patient.birthday}"/>
       </div>
 
       <div class="form-actions">

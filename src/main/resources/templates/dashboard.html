@@ -22,7 +22,7 @@
     </div>
     <div class="stat-card">
       <div class="stat-icon">🔔</div>
-      <div class="stat-value" th:text="${unreadCount}">0</div>
+      <div class="stat-value" th:text="${unreadNotifications}">0</div>
       <div class="stat-label">Непрочитаних сповіщень</div>
       <a th:href="@{/notifications}" class="stat-link">Переглянути →</a>
     </div>
@@ -57,15 +57,15 @@
         </td>
         <td>
           <form th:action="@{/appointments/{id}/complete(id=${apt.id})}"
-                method="post" style="display:inline"
+                method="post" class="form-inline"
                 th:if="${apt.status.name() == 'SCHEDULED'}">
-            <button type="submit" class="btn btn-sm btn-success">✓</button>
+            <button type="submit" class="btn btn-sm btn-success">✓ Завершено</button>
           </form>
           <form th:action="@{/appointments/{id}/cancel(id=${apt.id})}"
-                method="post" style="display:inline"
+                method="post" class="form-inline"
                 th:if="${apt.status.name() == 'SCHEDULED'}">
             <button type="submit" class="btn btn-sm btn-danger"
-                    onclick="return confirm('Скасувати прийом?')">✗</button>
+                    onclick="return confirm('Скасувати прийом?')">✗ Скасувати</button>
           </form>
         </td>
       </tr>
